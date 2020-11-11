@@ -2,6 +2,9 @@ import numpy as np
 import argparse
 import glob
 import cv2
+
+
+
 def auto_canny(image, sigma=0.33):
 
 	v = np.median(image)
@@ -29,14 +32,7 @@ for imagePath in glob.glob(args["images"] + "/*.jpg"):
 	tight = cv2.Canny(blurred, 225, 250)
 	auto = auto_canny(blurred)
 	
-	img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-	file_object = io.BytesIO()
-	img= Image.fromarray(Helpers.resize(img,width=500))
-	img.save(file_object, 'PNG')
-	base64img = "data:image/png;base64,"+base64.b64encode(file_object.getvalue()).decode('ascii')
-	images.append([message,base64img])
 
-		
 	cv2.imshow("Original", image)
 	cv2.imshow("Edges", np.hstack([wide, tight, auto]))
 	cv2.waitKey(0)
