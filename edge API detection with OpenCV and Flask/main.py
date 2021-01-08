@@ -11,15 +11,11 @@ from json import JSONEncoder
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
+def Home():
   return 'Edge detection API!'
 
 
-class NumpyArrayEncoder(JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, np.ndarray):
-            return obj.tolist()
-        return JSONEncoder.default(self, obj)
+
 
 
 def auto_canny(image, sigma=0.33):
