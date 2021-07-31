@@ -1,4 +1,5 @@
 const express = require('express');
+const Post = require('../models/Post');
 const router = express.Router();
 const Posts = require('../models/Post');
 
@@ -9,7 +10,19 @@ router.get('/', (req, res) => {
 
 
 router.post('/', (req, res) =>{
-    res.send(req.body)
+    const post = new Post({
+        title: req.boby.title,
+        description: req.boby.description
+    });
+
+   post.save()
+    .then(data => {
+        res.json(data)
+    })
+    .catch(err => {
+        res.json({ message: err });
+    });
+
 
 });
 
