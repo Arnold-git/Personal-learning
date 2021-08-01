@@ -9,19 +9,18 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/', (req, res) =>{
+router.post('/', async (req, res) =>{
     const post = new Post({
         title: req.boby.title,
         description: req.boby.description
     });
 
-   post.save()
-    .then(data => {
-        res.json(data)
-    })
-    .catch(err => {
-        res.json({ message: err });
-    });
+    try {
+        const savedPost = await post.save();
+        res.json(savedPost);
+    } catch (err) {
+        res.json({ message: err});
+    }
 
 
 });
