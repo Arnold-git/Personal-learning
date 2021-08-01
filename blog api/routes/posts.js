@@ -4,8 +4,13 @@ const Post = require('../models/Post');
 
 
 
-router.get('/', (req, res) => {
-    res.send('We are on posts');
+router.get('/', async (req, res) => {
+    try {
+        const posts = await Post.find();
+        res.json(posts)
+    } catch (err) {
+        res.json({ message: err });
+    }
 });
 
 
@@ -24,5 +29,10 @@ router.post('/', async (req, res) =>{
 
 
 });
+
+
+router.get('/:postId', (res, req) =>{
+    console.log
+})
 
 module.exports = router;
