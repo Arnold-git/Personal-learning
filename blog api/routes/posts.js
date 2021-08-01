@@ -1,7 +1,7 @@
 const express = require('express');
-const Post = require('../models/Post');
 const router = express.Router();
-const Posts = require('../models/Post');
+const Post = require('../models/Post');
+
 
 
 router.get('/', (req, res) => {
