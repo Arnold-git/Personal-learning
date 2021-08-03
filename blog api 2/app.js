@@ -6,6 +6,7 @@ const userRouter = require('./Routes/user');
 
 
 
+app.use(express.json())
 
 app.use(morgan('dev'))
 app.use('/user', userRouter)
