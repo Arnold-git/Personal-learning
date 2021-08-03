@@ -1,11 +1,14 @@
 const express = require('express')
 const app = express();
+const morgan = require('morgan');
 
-app.use('/user', (req, res, next) =>{
-    res.status(200).json({
-        message: "User request"
-    })
-})
+const userRouter = require('./Routes/user');
+
+
+
+
+app.use(morgan('dev'))
+app.use('/user', userRouter)
 
 app.use('/', (req, res, next) =>{
     res.status(200).json({

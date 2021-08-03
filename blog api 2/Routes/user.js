@@ -10,7 +10,6 @@ router.post('/', (req, res, next) =>{
 });
 
 
-
 router.get('/', (req, res, next) =>{
     res.status(200).json({
         message: "user request route"
@@ -30,6 +29,7 @@ router.patch('/', (req, res, next) =>{
         message: "This is a patch request route"
     });
 });
+
 
 router.delete('/', (req, res, next) =>{
     res.status(200).json({
