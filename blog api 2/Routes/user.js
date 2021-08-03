@@ -3,11 +3,14 @@ const router = express.Router();
 
 
 
-router.post('/', (req, res, next) =>{
+router.post('/:userId', (req, res, next) =>{
+
+    const userId = req.params.userId;
     res.status(200).json({
         message: "This is a post request route",
         "userName":req.body.name,
-        "userAge": req.body.age
+        "userAge": req.body.age,
+        "user_Id": userId
     });
 });
 
