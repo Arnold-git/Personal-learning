@@ -1,3 +1,8 @@
+var user = null;
+// union operator in typescript
+var username = "alex";
+var pageNum = "1";
+var errorMessage = null;
 // Functions
 var getFullName = function (name, surname) {
     return name + " " + surname;

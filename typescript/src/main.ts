@@ -1,4 +1,19 @@
 
+interface UserInterface {
+    name: string
+    surname: string
+}
+
+
+let user: UserInterface | null = null;
+
+// union operator in typescript
+
+let username: string = "alex"
+
+let pageNum: string | number = "1";
+
+let errorMessage: string | null = null;
 
 
 // Functions
