@@ -1,13 +1,21 @@
+// type aliases
 
+type ID = string
+type PopularTag = string;
+type MaybePopularTags = PopularTag | null
+
+
+const popularTags: PopularTag[] = ['dragon', 'coffee']
+const dragonTags: MaybePopularTags = "dragon"
+// union operator in typescript
 interface UserInterface {
-    name: string
-    surname: string
+    name: string;
+    surname: string;
 }
 
 
 let user: UserInterface | null = null;
 
-// union operator in typescript
 
 let username: string = "alex"
 

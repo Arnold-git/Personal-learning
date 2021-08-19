@@ -1,5 +1,7 @@
+// type aliases
+var popularTags = ['dragon', 'coffee'];
+var dragonTags = "dragon";
 var user = null;
-// union operator in typescript
 var username = "alex";
 var pageNum = "1";
 var errorMessage = null;
