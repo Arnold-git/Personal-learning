@@ -1,9 +1,32 @@
+// type assertion
+let pageNumber: string = "1";
+let numericPageNumber: number = (pageNumber as unknown) as number
 
-// any/void/never/unknown
+
+
+
+
+// any/void/never/unknown data type
 
 const doSomething = (): void => {
     console.log("do something")
-}
+};
+
+// const doSomething = (): never => {
+//     throw "never"
+// };
+
+let vAry: any = 10;
+let vUnknown: unknown = 10;
+
+let s1: string = vAry;
+
+let s2: string = vUnknown as string // we cant directly assign type unknown to other type
+
+
+// any D-type
+// let foo: any = "foo"
+// console.log(foo.bar());
 
 
 // type aliases and union
