@@ -1,4 +1,7 @@
-// type aliases
+// any/void/never/unknown
+var doSomething = function () {
+    console.log("do something");
+};
 var popularTags = ['dragon', 'coffee'];
 var dragonTags = "dragon";
 var user = null;

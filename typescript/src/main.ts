@@ -1,4 +1,12 @@
-// type aliases
+
+// any/void/never/unknown
+
+const doSomething = (): void => {
+    console.log("do something")
+}
+
+
+// type aliases and union
 
 type ID = string
 type PopularTag = string;
