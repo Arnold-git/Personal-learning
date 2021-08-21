@@ -1,3 +1,4 @@
+var someElement = document.querySelector(".foo");
 // type assertion
 var pageNumber = "1";
 var numericPageNumber = pageNumber;

@@ -1,8 +1,14 @@
+const someElement = document.querySelector(".foo")
+
+
+
+
+
+
+
 // type assertion
 let pageNumber: string = "1";
 let numericPageNumber: number = (pageNumber as unknown) as number
-
-
 
 
 
