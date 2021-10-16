@@ -15,7 +15,7 @@ class APIFeatures {
   }
 
   filter() {
-    const queryObj = {...this.query };
+    const queryObj = {...this.queryString };
     const excludeFields = ['page', 'sort', 'limit', 'fields'];
     excludeFields.forEach(el => delete queryObj[el]);
 
@@ -82,7 +82,7 @@ exports.getAllTours = async (req, res) => {
     // console.log(JSON.parse(queryStr));
     
 
-    let query = Tour.find(JSON.parse(queryStr))
+    // let query = Tour.find(JSON.parse(queryStr))
 
     // sorting
 
@@ -118,10 +118,11 @@ exports.getAllTours = async (req, res) => {
     // }
 
     const features = new APIFeatures(Tour.find(), req.query)
-    .filter()
-    .sort()
-    .paginate()
-    .limitFields()
+      .filter()
+      .sort()     
+      .limitFields()
+      .paginate();
+
     const tours = await features.query;
 
     res.status(200).json({
