@@ -59,13 +59,9 @@ class APIFeatures {
     const skip = (page - 1) * limit;
 
     this.query = this.query.skip(skip).limit(limit)
-    
+
     return this;
   }
-
-
-  const features = new APIFeatures(Tour.find(), req.query).filter()
-  const tours = await features.query;
   
 }
 
@@ -121,8 +117,12 @@ exports.getAllTours = async (req, res) => {
     //   if (skip >= numTours) throw new Error('This page does not exit');
     // }
 
-    // const features = new APIFeatures(Tour.find(), req.query).filter()
-    // const tours = await features.query;
+    const features = new APIFeatures(Tour.find(), req.query)
+    .filter()
+    .sort()
+    .paginate()
+    .limitFields()
+    const tours = await features.query;
 
     res.status(200).json({
       status: "Success",
