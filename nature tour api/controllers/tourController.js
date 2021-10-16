@@ -8,14 +8,14 @@ exports.aliasTopTours = (req, res, next) => {
   next();
 }
 
+class APIFeatures {
+  constructor(query, queryString) {
+    this.query = query;
+    this.queryStr = queryString;
+  }
 
-exports.getAllTours = async (req, res) => {
-
-
-  try {
-
-    // Filtering
-    const queryObj = {...req.query };
+  filter() {
+    const queryObj = {...this.query };
     const excludeFields = ['page', 'sort', 'limit', 'fields'];
     excludeFields.forEach(el => delete queryObj[el]);
 
@@ -23,7 +23,36 @@ exports.getAllTours = async (req, res) => {
 
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
-    console.log(JSON.parse(queryStr));
+    
+    this.query.find(JSON.parse(queryStr))
+  }
+
+  sort() {
+    if(this.queryString.sort) {
+      const sortBy = this.queryString.sort.split(',').join(' ');
+      this.query = this.query(sortBy);
+    } else {
+      this.query = this.query.sort('-createdAt');
+    }
+
+  }
+}
+
+exports.getAllTours = async (req, res) => {
+
+
+  try {
+
+    // Filtering
+    // const queryObj = {...req.query };
+    // const excludeFields = ['page', 'sort', 'limit', 'fields'];
+    // excludeFields.forEach(el => delete queryObj[el]);
+
+    // // Advanced filtering
+
+    // let queryStr = JSON.stringify(queryObj);
+    // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+    // console.log(JSON.parse(queryStr));
     
 
     let query = Tour.find(JSON.parse(queryStr))
@@ -31,13 +60,13 @@ exports.getAllTours = async (req, res) => {
     // sorting
 
 
-    if(req.query.sort) {
-      const sortBy = req.query.sort.split(',').join(' ');
-      console.log(sortBy);
-      query = query.sort(sortBy);
-    } else {
-      query = query.sort('-createdAt')
-    }
+    // if(req.query.sort) {
+    //   const sortBy = req.query.sort.split(',').join(' ');
+    //   console.log(sortBy);
+    //   query = query.sort(sortBy);
+    // } else {
+    //   query = query.sort('-createdAt')
+    // }
 
     // field limiting
 
@@ -60,7 +89,9 @@ exports.getAllTours = async (req, res) => {
       const numTours = await tours.countDocuments();
       if (skip >= numTours) throw new Error('This page does not exit');
     }
-    const tours = await query;
+
+    const features = new APIFeatures(Tour.find(), req.query).filter()
+    const tours = await features.query;
 
     res.status(200).json({
       status: "Success",

@@ -11,7 +11,7 @@ router.route('/top-5-cheap')
 router
   .route('/')
   .get(tourController.getAllTours)
-  .post(tourController.createTour);
+  .post(tourController.createTour)
 
 router
   .route('/:id')
