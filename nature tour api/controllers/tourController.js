@@ -25,17 +25,23 @@ class APIFeatures {
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
     
     this.query.find(JSON.parse(queryStr))
+
+    return this
   }
 
   sort() {
     if(this.queryString.sort) {
       const sortBy = this.queryString.sort.split(',').join(' ');
-      this.query = this.query(sortBy);
+      this.query = this.query.sort(sortBy);
     } else {
       this.query = this.query.sort('-createdAt');
     }
 
+    return this;
+
   }
+
+  
 }
 
 exports.getAllTours = async (req, res) => {
