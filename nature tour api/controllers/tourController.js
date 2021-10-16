@@ -11,7 +11,7 @@ exports.aliasTopTours = (req, res, next) => {
 class APIFeatures {
   constructor(query, queryString) {
     this.query = query;
-    this.queryStr = queryString;
+    this.queryString = queryString;
   }
 
   filter() {
@@ -44,7 +44,7 @@ class APIFeatures {
   limitFields() {
     if(this.queryString.fields) {
       const fields = this.queryString.fields.split(",").join(" ")
-      this.query = query.select(fields)
+      this.query = this.query.select(fields)
     } else {
       this.query = this.query.select('-__v')
     }
@@ -69,6 +69,8 @@ exports.getAllTours = async (req, res) => {
 
 
   try {
+
+    console.log(req.query)
 
     // Filtering
     // const queryObj = {...req.query };
