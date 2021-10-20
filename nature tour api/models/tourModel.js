@@ -54,9 +54,24 @@ const tourSchema = new mongoose.Schema({
     },
     startDates: [Date],
 
-})
+}, {
+    toJSON: { virtuals: true},
+    toObject: { virtuals: true}
+});
+
+// vitual prperty
+tourSchema.virtual('durationWeeks').get(function() {
+    return this.duration / 7;
+});
+
+// Document middleware
+// only works for .save() and .create(). Doesnt work with updateMany
+tourSchema.pre('save', function(){
+    console.log(this);
+});
 
 const Tour = mongoose.model('Tour', tourSchema)
+
 
 
 module.exports = Tour;
