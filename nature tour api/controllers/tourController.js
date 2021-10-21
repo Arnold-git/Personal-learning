@@ -79,7 +79,7 @@ exports.createTour = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: 'Failed',
-      message: "Invalid data sent"
+      message: err
     })
   }
 };
@@ -157,13 +157,13 @@ exports.getTourStats = async (req, res) => {
           avgPrice: 1
         }
       },
-      {
-        $match: {
-          _id: {
-            $ne: 'EASY'
-          }
-        }
-      }
+      // {
+      //   $match: {
+      //     _id: {
+      //       $ne: 'EASY'
+      //     }
+      //   }
+      // }
     ]);
 
     res.status(200).json({
