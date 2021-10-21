@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-
+const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 const tourSchema = new mongoose.Schema({
     name: {
@@ -8,6 +8,7 @@ const tourSchema = new mongoose.Schema({
         unique:  true,
         trim: true
     },
+    slug: String,
     duration: {
         type: Number,
         required: [true, 'A tour must have a duration']
@@ -67,8 +68,20 @@ tourSchema.virtual('durationWeeks').get(function() {
 // Document middleware
 // only works for .save() and .create(). Doesnt work with updateMany
 tourSchema.pre('save', function(){
-    console.log(this);
+    this.slug = slugify(this.name, {lower: true});
+    next();
 });
+
+tourSchema.pre('save', function(){
+    console.log('Will save document...');
+    next();
+});
+
+
+tourSchema.post('save', function(doc, next){
+    console.log(doc);
+    next();
+})
 
 const Tour = mongoose.model('Tour', tourSchema)
 
