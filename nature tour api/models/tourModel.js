@@ -12,6 +12,13 @@ const tourSchema = new mongoose.Schema({
         trim: true,
         maxlength: [40, 'Name must have less than or equal 40 charactrers'],
         minlength: [10, 'Name must have atleast 10 characters'],
+        validate: {
+            validator: function (val) {
+                const valNoSpaces = val.split(' ').join('');
+                return validator.isAlpha(valNoSpaces, 'en-GB');
+            },
+            message: 'String have to contain only alphanumeric with spaces'
+        }
     },
     slug: String,
     duration: {
