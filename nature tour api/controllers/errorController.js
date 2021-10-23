@@ -8,10 +8,14 @@ sendErrorDev = (err, res) => {
 }
 
 sendErrorProd = (err, res) => {
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message
-  });  
+
+  if(err.isOperational) {
+    
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
+    });  
+  }
 }
 
 module.exports = (err, req, res, next) => {
@@ -20,12 +24,11 @@ module.exports = (err, req, res, next) => {
     err.status = err.status || 'error';
 
     if(process.env.NODE_ENV === 'developemnt') {
-      
+      sendErrorDev(err, res); 
 
     } else if (process.env.NODE_ENV ==='production') {
-      
-      
 
+      sendErrorProd(err, res);
     }
   
 
