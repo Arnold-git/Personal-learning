@@ -45,7 +45,7 @@ exports.getTour = catchAsync(async (req, res, next) => {
     }
 
     res.status(200).json({
-      status: "Sucess",
+      status: "Success",
       data: {
         tour
       }
