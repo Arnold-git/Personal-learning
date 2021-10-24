@@ -22,7 +22,7 @@ const sendErrorProd = (err, res) => {
 
   // Operational error, send message to client 
 
-  if (err.Operational) {
+  if (err.isOperational) {
 
     res.status(err.statusCode).json({
       status: err.status,
