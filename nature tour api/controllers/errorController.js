@@ -29,7 +29,7 @@ module.exports = (err, req, res, next) => {
 
       SendErrorDev(err, dev)
 
-    } else if (process.env.NODE_ENV === 'Productionn') {
+    } else if (process.env.NODE_ENV === 'productionn') {
 
       sendErrorProd(res, err)
 
