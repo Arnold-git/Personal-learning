@@ -34,8 +34,6 @@ const sendErrorProd = (err, res) => {
       message: "Something went wrong"
     })
   }
-
-
 }
 
 
@@ -52,9 +50,5 @@ module.exports = (err, req, res, next) => {
 
       sendErrorProd(res, err)
 
-
-
-    }
-  
-    
+    }    
 }
