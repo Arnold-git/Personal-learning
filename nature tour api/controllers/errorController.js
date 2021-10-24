@@ -48,6 +48,10 @@ module.exports = (err, req, res, next) => {
 
     } else if (process.env.NODE_ENV === 'production') {
 
+      let error = { ...err };
+
+      if (error.name === 'CastError') error = handleCastErrorDB(err);
+
       sendErrorProd(err, res)
 
     }    
