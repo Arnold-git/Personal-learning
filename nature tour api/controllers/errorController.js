@@ -11,11 +11,16 @@ const SendErrorDev = (err, res) => {
 
 const sendErrorProd = (err, res) => {
 
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message
+  if (err.Operational) {
+    
+    res.status(err.statusCode).json({
+      status: err.status,
+      message: err.message
+  
+    });
 
-  });
+  }
+
 
 }
 
