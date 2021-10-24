@@ -9,10 +9,12 @@ const handleDuplicateFieldsDB = err => {
 
   const value = err.ermsg.match(/["'])(\\?.)*?\1/)[0]
 
+  console.log(value)
+
   const message = "Duplicate field value: x. Please use another value";
 
-  return new AppError(message, 400)
-}
+  return new AppError(message, 400);
+};
 
 const SendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
