@@ -22,7 +22,6 @@ const userSchema = new mongoose.Schema({
     },
     photo: {
         type: String,
-        require: [true, 'Provide a valid photo']
     },
     password: {
         type: String,
