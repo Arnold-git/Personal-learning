@@ -3,6 +3,13 @@ const dotenv = require('dotenv');
 
 
 
+// error handler for unhandled exception
+process.on('uncaughtException', err => {
+    console.log('UNCAUGHT EXCEPTION');
+    console.log(err.name, err.message);
+    process.exit(1);
+});
+
 dotenv.config();
 const app = require('./app')
 
@@ -27,15 +34,13 @@ const server = app.listen(port, () => {
 // error handler for unhandled promise rejection
 process.on('unhandledRejection', err => {
     console.log('UNHANDLE REJECTION... ')
-    console.log(err);
+    console.log(err.name, err.message);
     // server.close(() => {
     //     process.exit(1)
     // });
 });
 
-// error handler for unhandled exception
 
-process.on('uncaughtException', err => {
-    console.log('UNCAUGHT EXCEPTION');
-    console.log(err)
-})
+
+
+
