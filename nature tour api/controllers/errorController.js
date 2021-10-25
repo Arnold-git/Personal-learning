@@ -17,6 +17,12 @@ const handleDuplicateFieldsDB = err => {
 
 };
 
+
+const handleValidationErrorDB = err => {
+  const message = "Invalid input data";
+  return new AppError(message, 400)
+}
+
 const SendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
 
