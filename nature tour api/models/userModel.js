@@ -30,7 +30,14 @@ const userSchema = new mongoose.Schema({
     },
     passwordConfirm: {
         type: String,
-        require: [true, 'Please, confirm your password']
+        require: [true, 'Please, confirm your password'],
+        validate: {
+            // This is only wortk for SAVE
+            // validator is a callback function
+            validator: function(el) {
+                return el === this.password
+            }
+        }
     }
 
 
