@@ -15,10 +15,7 @@ mongoose.connect(
         useCreateIndex: true,
         useFindAndModify: false
     }
-).then(() => console.log('DB connection successfully')).catch(
-    err => {console.log(err)
-});
-
+).then(() => console.log('DB connection successfully'))
 
 const port = process.env.PORT || 8080
 
@@ -26,4 +23,6 @@ app.listen(port, () => {
     console.log(`App running on port ${port}...`)
 });
 
-
+process.on('unhandledRejection', err => {
+    console.log(err.name, err.message);
+})
