@@ -23,10 +23,19 @@ const server = app.listen(port, () => {
     console.log(`App running on port ${port}...`)
 });
 
+
+// error handler for unhandled promise rejection
 process.on('unhandledRejection', err => {
-    console.log(err.name, err.message);
-    console.log('UNHANDLE REJECTION shutting down...')
+    console.log('UNHANDLE REJECTION... ')
+    console.log(err);
     // server.close(() => {
     //     process.exit(1)
     // });
 });
+
+// error handler for unhandled exception
+
+process.on('uncaughtException', err => {
+    console.log('UNCAUGHT EXCEPTION');
+    console.log(err)
+})
