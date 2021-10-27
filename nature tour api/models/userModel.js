@@ -45,7 +45,6 @@ const userSchema = new mongoose.Schema({
 
 
 // DOCUMENT MIDDLEWARE TO ENCRYPT PASSWORD
-
 userSchema.pre('save', async function(next) {
 
     // ONLY RUN FUNCTION IF PASSWORD IS ACTUALLY MODIFIED
