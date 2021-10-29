@@ -41,7 +41,7 @@ exports.login = (req, res, next) => {
     const token = '';
 
     res.status(200).json({
-        status: 'success',
+        status: 'Success',
         token
     })
 }
