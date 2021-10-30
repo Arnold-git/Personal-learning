@@ -17,7 +17,7 @@ router.route('/monthly-plan/:year')
 
 router
   .route('/')
-  .get(tourController.getAllTours)
+  .get(authController.requireSignin, tourController.getAllTours)
   .post(tourController.createTour)
 
 router

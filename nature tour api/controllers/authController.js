@@ -55,3 +55,17 @@ exports.login = catchAsync(async (req, res, next) => {
         token
     })
 })
+
+exports.requireSignin = catchAsync(async (req, res, next) => {
+
+    // 1) Getting token and check if valid
+
+    // 2) Getting token and check if valid
+
+    // 3) check if user still exists
+
+    // 4) Check if user changed password after token was issue
+
+
+    next()
+})
