@@ -60,6 +60,20 @@ exports.requireSignin = catchAsync(async (req, res, next) => {
 
     // 1) Getting token and check if valid
 
+    let token;
+
+    if (req.headers.authorization && 
+        req.headers.authorization.startsWith('Bearer')
+    ) {
+        token = req.headers.authorization.split(' ')[1]
+    }
+
+    console.log(token)
+
+    if(!token) {
+        return next(new AppError('You are NOT logined in! Please login to access', 401))
+    }
+
     // 2) Getting token and check if valid
 
     // 3) check if user still exists
