@@ -31,12 +31,16 @@ exports.signup = catchAsync(async (req, res, next) => {
 });  
 
 
-exports.login = (req, res, next) => {
+exports.login = catchAsync(async (req, res, next) => {
     const {email, password } = req.body
 
+    // CHECK IF CLIENT SENDS EMAIL AND PASSWORD
     if (!email || !password) {
         return (next(new AppError('Please provide email and password'), 400));
     }
+
+    // CHECK THE USER WITH THAT EMAIL THAT MATCH THAT PASSWORD
+    const user = User.findOne({ email }).select('+password')
 
     const token = '';
 
@@ -44,4 +48,4 @@ exports.login = (req, res, next) => {
         status: 'Success',
         token
     })
-}
+})
