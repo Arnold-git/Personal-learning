@@ -24,10 +24,15 @@ mongoose.connect(
     }
 ).then(() => console.log('DB connection successfully'))
 
-const port = process.env.PORT || 8080
+const PORT = process.env.PORT || 8080
 
-const server = app.listen(port, () => {
-    console.log(`App running on port ${port}...`)
+const server = app.listen(PORT, () => {
+    console.log(`
+    ################################################
+    🛡️  Server listening on port: ${PORT} 🛡️
+    ################################################
+    SERVER IN ${process.env.NODE_ENV} MODE
+  `);
 });
 
 

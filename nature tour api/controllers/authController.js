@@ -71,7 +71,7 @@ exports.requireSignin = catchAsync(async (req, res, next) => {
     console.log(token)
 
     if(!token) {
-        return next(new AppError('You are NOT logined in! Please login to access', 401))
+        return next(new AppError('You are NOT logined in! Please, login to access', 401))
     }
 
     // 2) Getting token and check if valid
