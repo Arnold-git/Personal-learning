@@ -97,8 +97,7 @@ exports.requireSignin = catchAsync(async (req, res, next) => {
     };
 
 
-    // Gran access to the protected route
-
+    // Grant access to the protected route
     req.user = freshUser
     next()
 })
