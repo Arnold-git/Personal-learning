@@ -96,7 +96,6 @@ exports.requireSignin = catchAsync(async (req, res, next) => {
         return next(AppError('User recently changed password, Please log in again', 401))
     };
 
-
     // Grant access to the protected route
     req.user = freshUser
     next()
