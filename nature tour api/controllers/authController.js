@@ -93,7 +93,7 @@ exports.requireSignin = catchAsync(async (req, res, next) => {
     // 4) Check if user changed password after token was issue
 
     if (currentUser.changedPasswordAfter(decoded.iat)) {
-        return next(AppError('User recently changed password, Please log in again', 401))
+        return next(new AppError('User recently changed password, Please log in again', 401))
     };
 
     // Grant access to the protected route
