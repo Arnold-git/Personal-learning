@@ -84,19 +84,19 @@ exports.requireSignin = catchAsync(async (req, res, next) => {
 
     // 3) check if user still exists
 
-    freshUser = await User.findById(decoded.id);
+    currentUser = await User.findById(decoded.id);
 
-    if(!freshUser) {
+    if(!currentUser) {
         return next(new AppError('The user belonging to this token no longer exist', 401))
     }
 
     // 4) Check if user changed password after token was issue
 
-    if (freshUser.changedPasswordAfter(decoded.iat)) {
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
         return next(AppError('User recently changed password, Please log in again', 401))
     };
 
     // Grant access to the protected route
-    req.user = freshUser
+    req.user = currentUser
     next()
 })
