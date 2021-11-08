@@ -38,7 +38,7 @@ class APIFeatures {
       } else {
         this.query = this.query.select('-__v')
       }
-  
+       
       return this;
     }
   
