@@ -14,7 +14,8 @@ exports.signup = catchAsync(async (req, res, next) => {
          email: req.body.email,
          password: req.body.password,
          passwordConfirm: req.body.passwordConfirm,
-         passwordChangedAt: req.body.passwordChangedAt
+         passwordChangedAt: req.body.passwordChangedAt,
+         role: req.body.role,
     });
 
     const token = signInToken(newUser._id)
@@ -103,7 +104,7 @@ exports.requireSignin = catchAsync(async (req, res, next) => {
 
 exports.restrictTo = (...roles) => {
     return (req, res, next) => {
-        if(!roles.includes(req.user)) {
+        if(!roles.includes(req.user.role)) {
             return next(new AppError(
                 'You do have permission to perform this action',
                 403
