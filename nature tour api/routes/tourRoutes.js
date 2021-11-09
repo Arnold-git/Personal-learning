@@ -25,7 +25,7 @@ router
   .get(tourController.getTour)
   .patch(tourController.updateTour)
   .delete(authController.requireSignin, 
-    authController.restrictTo('admin'), 
+    authController.restrictTo('admin', 'tour-lead'), 
     tourController.deleteTour);
 
 module.exports = router;
