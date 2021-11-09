@@ -100,3 +100,16 @@ exports.requireSignin = catchAsync(async (req, res, next) => {
     req.user = currentUser
     next()
 })
+
+exports.restrictTo = (...roles) => {
+    return (req, res, next) => {
+        if(!roles.includes(req.user)) {
+            return next(new AppError(
+                'You do have permission to perform this action',
+                403
+            ));
+        }
+
+        next();
+    }
+}
