@@ -112,5 +112,5 @@ exports.restrictTo = (...roles) => {
         }
 
         next();
-    }
-}
+    };
+};
