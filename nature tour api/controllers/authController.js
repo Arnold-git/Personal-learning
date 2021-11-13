@@ -119,4 +119,6 @@ exports.forgotPassword = (req, res, next) => {
 
 }
 
-exports
+exports.resetPassword = (req, res, next) => {
+    
+}
