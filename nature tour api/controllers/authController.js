@@ -119,6 +119,8 @@ exports.forgotPassword = catchAsync( async (req, res, next) => {
 
     // 1) GET USER BASED ON EMAIL
 
+    const user = await User.findOne({ email: req.user.email })
+
     // 2) GENERATE RANDOM RESET TOKEN
 
     // 3) SEND IT TO USER EMAIL
