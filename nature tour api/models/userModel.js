@@ -89,8 +89,10 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
 }
 
 userSchema.methods.changedPasswordResetToken = function() {
-    const resetToken = crypto.randomBytes(32).toString('hex')
-}
+    const resetToken = crypto.randomBytes(32).toString('hex');
+
+    crypto.createHash('sha256').update(resetToken).digest('hex');    
+};
 const User = mongoose.model('User', userSchema)
 
 module.exports = User
