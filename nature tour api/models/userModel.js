@@ -52,7 +52,9 @@ const userSchema = new mongoose.Schema({
             message: 'password and password confirm must be the same'
         }
     },
-    passwordChangedAt: Date
+    passwordChangedAt: Date,
+    passwordREsetToken: String,
+    passwordResetExpires: Date
 });
 
 
