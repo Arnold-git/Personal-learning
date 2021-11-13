@@ -88,7 +88,7 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
     return false
 }
 
-userSchema.methods.changedPasswordResetToken = async fumction() {
+userSchema.methods.changedPasswordResetToken = async function() {
     const await resetToken = crypto.randomBytes(32).toString('hex')
 }
 const User = mongoose.model('User', userSchema)
