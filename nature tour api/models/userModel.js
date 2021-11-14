@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema({
         }
     },
     passwordChangedAt: Date,
-    passwordREsetToken: String,
+    passwordResetToken: String,
     passwordResetExpires: Date
 });
 
@@ -93,7 +93,9 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
 userSchema.methods.changedPasswordResetToken = function() {
     const resetToken = crypto.randomBytes(32).toString('hex');
 
-    crypto.createHash('sha256').update(resetToken).digest('hex');    
+    this.passwordREsetToken = crypto.createHash('sha256').
+    update(resetToken).
+    digest('hex');    
 };
 const User = mongoose.model('User', userSchema)
 
