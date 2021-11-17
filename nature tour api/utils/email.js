@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 const sendEmail = async options => {
     // 1) create transporter
-    const transport = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: process.env.EMAIL_PORT,
         auth: {
@@ -21,5 +21,5 @@ const sendEmail = async options => {
     }
 
     // 3) Send the email
-    await transporter.sendEmail()
+    await transporter.sendEmail(mailOptions)
 }
