@@ -4,6 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('./../models/userModel');
 const AppError = require('../utils/appError');
 const signInToken = require('../utils/signInToken');
+const sendEmail = require('../utils/email');
 
 
 
@@ -134,6 +135,8 @@ exports.forgotPassword = catchAsync( async (req, res, next) => {
     await user.save({ validateBeforeSave: false });
 
     // 3) SEND IT TO USER EMAIL
+
+    const resetURL = 
 
     next()
 
