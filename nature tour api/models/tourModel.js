@@ -94,7 +94,7 @@ const tourSchema = new mongoose.Schema({
     toObject: { virtuals: true}
 });
 
-// vitual property
+/** vitual property */
 tourSchema.virtual('durationWeeks').get(function() {
     return this.duration / 7;
 });
@@ -131,14 +131,12 @@ tourSchema.post(/^find/, function(docs, next){
     next();
 });
 
-// aggregation middleware
+/** aggregation middleware */
 tourSchema.pre('aggregate', function(next) {
     this.pipeline().unshift( {$match: { secretTour: { $ne: true } }})
     next();
 })
 
 const Tour = mongoose.model('Tour', tourSchema)
-
-
 
 module.exports = Tour;
