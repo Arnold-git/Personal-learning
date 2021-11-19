@@ -56,7 +56,7 @@ const tourSchema = new mongoose.Schema({
     },
     priceDiscount: {
         type: Number,
-        // this only points to new document creation
+        /** this only points to new document creation */
         validate: {
             validator: function(val) {
                 return val < this.price
@@ -99,8 +99,8 @@ tourSchema.virtual('durationWeeks').get(function() {
     return this.duration / 7;
 });
 
-// Document middleware
-// only works for .save() and .create(). Doesnt work with updateMany
+/** Document middleware */
+/** only works for .save() and .create(). Doesnt work with updateMany */
 tourSchema.pre('save', function(){
     this.slug = slugify(this.name, {lower: true});
     next();
@@ -117,7 +117,7 @@ tourSchema.pre('save', function(){
 //     next();
 // })
 
-// query middleware
+/** query middleware */
 tourSchema.pre(/^find/, function(next){
     this.find({ secretTour: {$ne: true } });
 

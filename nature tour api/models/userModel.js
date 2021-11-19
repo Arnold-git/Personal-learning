@@ -44,8 +44,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please, confirm your password'],
         validate: {
-            // This is only wortk for SAVE and .create
-            // validator is a callback function
+            /** his is only wortk for SAVE and .create */
+            /** validator is a callback function */
             validator: function (el) {
                 return el === this.password
             }, 
@@ -58,10 +58,10 @@ const userSchema = new mongoose.Schema({
 });
 
 
-// DOCUMENT MIDDLEWARE TO ENCRYPT PASSWORD
+/** DOCUMENT MIDDLEWARE TO ENCRYPT PASSWORD */
 userSchema.pre('save', async function(next) {
 
-    // ONLY RUN FUNCTION IF PASSWORD IS ACTUALLY MODIFIED
+    /** ONLY RUN FUNCTION IF PASSWORD IS ACTUALLY MODIFIED */
     if(!this.isModified('password')) return next();
 
     this.password = await bcrypt.hash(this.password, 12);
@@ -70,7 +70,7 @@ userSchema.pre('save', async function(next) {
     next()
 })
 
-// MONGOOSE INSTANCE METHOD
+/** MONGOOSE INSTANCE METHOD */
 
 userSchema.methods.correctPassword = async function(candidatePassword, userPassword) {
     return  await bcrypt.compare(candidatePassword, userPassword)
