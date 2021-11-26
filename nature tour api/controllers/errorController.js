@@ -44,7 +44,7 @@ const SendErrorDev = (err, res) => {
 
 const sendErrorProd = (err, res) => {
 
-  // Operational error, send message to client 
+  /** Operational error, send message to client  */
 
   if (err.isOperational) {
 
@@ -54,14 +54,14 @@ const sendErrorProd = (err, res) => {
   
     });
 
-    // programming or other unknown errror
+    /** programming or other unknown errror */
 
   } else {
 
     // log error
     console.error('ERROR ', err)
 
-    // send generic message to client
+    /** send generic message to client */
     res.status(500).json({
       status: "error",
       message: "Something went wrong"
