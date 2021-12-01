@@ -137,7 +137,7 @@ exports.forgotPassword = catchAsync( async (req, res, next) => {
 
     /** 3) SEND IT TO USER EMAIL */
 
-    const resetURL = `${req.protocol}://${req.get{'host'}/api/v1}`
+    const resetURL = `${req.protocol}://${req.get('host')/api/v1}`
 
     next()
 
