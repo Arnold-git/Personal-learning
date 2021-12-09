@@ -8,15 +8,6 @@ class GdpDeptSpider(scrapy.Spider):
 
     def parse(self, response):
         countries = response.xpath('.//td/a')
-
-        for country in countries:
-            name = country.xpath('.//text()').get()
-            link = country.xpath('.//@href').get()
-
-            yield {
-                'country_name': name,
-                'link': link,
-                'link2': response.follow(url=link)
-            }
+        
 
         
