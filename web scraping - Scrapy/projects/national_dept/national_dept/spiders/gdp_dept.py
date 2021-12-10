@@ -1,13 +1,16 @@
 import scrapy
 
 
-class GdpDeptSpider(scrapy.Spider):
-    name = 'gdp_dept'
-    allowed_domains = ['www.worldpopulationreview.com/']
-    start_urls = ['https://worldpopulationreview.com/countries/countries-by-national-debt/']
+
+class GdpDebtSpider(scrapy.Spider):
+    name = 'gdp_debt'
+    allowed_domains = ['worldpopulationreview.com']
+    start_urls = ['http://worldpopulationreview.com/countries/countries-by-national-debt/']
 
     def parse(self, response):
-        countries = response.xpath('.//td/a')
-        
-
-        
+        rows = response.xpath("//table/tbody/tr")
+        for row in rows:
+            yield {
+                'country_name': row.xpath(".//td[1]/a/text()").get(),
+                'gdp_debt': row.xpath(".//td[2]/text()").get()
+            }
