@@ -11,7 +11,7 @@ const sendEmail = require('../utils/email');
 exports.signup = catchAsync(async (req, res, next) => {
    const { name, email, password, passwordConfirm, passwordChangedAt, role} = req.body;
    
-    const newUser = await User(   
+    const newUser = new User(   
          name,
          email,
          password,
@@ -137,7 +137,9 @@ exports.forgotPassword = catchAsync( async (req, res, next) => {
 
     /** 3) SEND IT TO USER EMAIL */
 
-    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/reset-password/${resetToken}`
+    const resetURL = `${req.protocol}://${req.get(
+        'host'
+    )}/api/v1/users/reset-password/${resetToken}`
 
     const message = `Forgot your password Submit a PATCH request with your new Password and 
     passwordConfirm to: ${resetURL}.\nif you didn't forget your password, ignore this email`;
