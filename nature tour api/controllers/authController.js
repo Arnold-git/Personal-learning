@@ -10,8 +10,7 @@ const sendEmail = require('../utils/email');
 
 exports.signup = catchAsync(async (req, res, next) => {
 
-    
-   const { name, email, password, passwordConfirm, passwordChangedAt, role} = req.body;
+//    const { name, email, password, passwordConfirm, passwordChangedAt, role} = req.body;
    
     const newUser = new User({   
          name: req.body.name,
