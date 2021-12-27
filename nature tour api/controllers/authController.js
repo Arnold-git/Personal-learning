@@ -122,7 +122,9 @@ exports.forgotPassword = catchAsync( async (req, res, next) => {
 
     /** 1) GET USER BASED ON EMAIL
  */
-    const user = await User.findOne({ email: req.body.email })
+    const user = await User.findOne(
+        { email: req.body.email }
+    );
 
     if(!user) {
         return next(new AppError(
