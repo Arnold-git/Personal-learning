@@ -1,4 +1,5 @@
 const { promisify } = require('util')
+const crypto = require('crypto')
 const jwt = require('jsonwebtoken');
 const catchAsync = require('../utils/catchAsync');
 const User = require('./../models/userModel');
@@ -120,8 +121,7 @@ exports.restrictTo = (...roles) => {
 
 exports.forgotPassword = catchAsync( async (req, res, next) => {
 
-    /** 1) GET USER BASED ON EMAIL
- */
+    /** 1) GET USER BASED ON EMAIL */
     const user = await User.findOne(
         { email: req.body.email }
     );
