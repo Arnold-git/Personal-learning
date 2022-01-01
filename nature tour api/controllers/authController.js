@@ -175,7 +175,7 @@ exports.forgotPassword = catchAsync( async (req, res, next) => {
 exports.resetPassword = catchAsync( async(req, res, next) => {
     //** 1) Get user based on the tokeb */
 
-    const hanshedToken = crypto.createHash('sha256').update(req.params.token).digest('hex')
+    const hanshedToken = crypto.createHash('sha256').update(req.params.resettoken).digest('hex')
 
     const user = await User.findOne({
         passwordResetToken: hanshedToken,
