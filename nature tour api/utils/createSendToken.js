@@ -5,7 +5,7 @@ module.exports = (user, statusCode, res) => {
     const tokem = signInToken(user._id);
 
     res.status(statusCode).json({
-        status: statusCode,
+        status: 'success',
         token,
         data: {
             user

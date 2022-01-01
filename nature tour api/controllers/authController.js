@@ -6,6 +6,7 @@ const User = require('./../models/userModel');
 const AppError = require('../utils/appError');
 const signInToken = require('../utils/signInToken');
 const sendEmail = require('../utils/email');
+const createSendToken = require('../utils/createSendToken');
 
 
 
@@ -21,18 +22,12 @@ exports.signup = catchAsync(async (req, res, next) => {
          passwordChangedAt: req.body.passwordChangedAt,
          role: req.body.role,
     });
+    createSendToken(newUser, 201, res)
 
     const token = signInToken(newUser._id)
 
     const user = await newUser.save()
 
-    res.status(201).json({
-        status: 'Success',
-        token, 
-        data: {
-            user: user
-        }
-    });
 
 });  
 
@@ -58,10 +53,9 @@ exports.login = catchAsync(async (req, res, next) => {
 
     const token = signInToken(user._id)
 
-    res.status(200).json({
-        status: 'Success',
-        token
-    })
+    createSendToken(user, 200, res)
+
+
 })
 
 exports.requireSignin = catchAsync(async (req, res, next) => {
@@ -201,10 +195,9 @@ exports.resetPassword = catchAsync( async(req, res, next) => {
 
     const token = signInToken(user._id)
 
-    res.status(200).json({
-        status: 'success',
-        token
-    });
+    createSendToken(user, 200, res)
+
+
 
 })
 
@@ -212,7 +205,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     /** 1) Get user from collection */
     const user = await User.findById(req.user.id).select('+password');
     /** 2) Check if posted current password is correct */
-    if (!(await user.correctPassword(req.body.passwordConfirm, user.password))) {
+    if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
         return next (new AppError('Your current password is wrong', 401))
     }
     /** 3) if yes, update password */
@@ -221,4 +214,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
     await user.save();
     /** 4) log user in, send JWT token */
+    createSendToken(user, 200, res)
 });
