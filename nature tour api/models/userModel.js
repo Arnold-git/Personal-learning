@@ -70,6 +70,11 @@ userSchema.pre('save', async function(next) {
     next()
 })
 
+//** Mongoose middleware save modified password */
+userSchema.pre('save', function(next) {
+    
+})
+
 /** MONGOOSE INSTANCE METHOD */
 
 userSchema.methods.correctPassword = async function(candidatePassword, userPassword) {
