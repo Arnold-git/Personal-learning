@@ -207,3 +207,7 @@ exports.resetPassword = catchAsync( async(req, res, next) => {
     });
 
 })
+
+exports.updatePassword = (req, res, next) => {
+    
+}
