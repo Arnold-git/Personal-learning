@@ -26,7 +26,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 
     const user = await newUser.save()
 
-    res.status(200).json({
+    res.status(201).json({
         status: 'Success',
         token, 
         data: {
