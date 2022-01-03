@@ -16,7 +16,7 @@ router.patch('/update-password',
  authController.requireSignin,
  authController.updatePassword)
 
- router.patch('/update-user', 
+router.patch('/update-user', 
   authController.requireSignin, 
   userController.updateUser)
 
