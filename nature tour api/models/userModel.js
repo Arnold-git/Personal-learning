@@ -67,7 +67,7 @@ userSchema.pre('save', async function(next) {
     this.password = await bcrypt.hash(this.password, 12);
     this.passwordConfirm = undefined;
     
-    next()
+    next();
 })
 
 //** Mongoose middleware save modified password */
@@ -80,9 +80,16 @@ userSchema.pre('save', function(next) {
 
 /** MONGOOSE INSTANCE METHOD */
 
-userSchema.methods.correctPassword = async function(candidatePassword, userPassword) {
-    return  await bcrypt.compare(candidatePassword, userPassword)
-}
+// userSchema.methods.correctPassword = async function(candidatePassword, userPassword) {
+//     return  await bcrypt.compare(candidatePassword, userPassword)
+// }
+
+userSchema.methods.correctPassword = async function(
+    candidatePassword,
+    userPassword
+  ) {
+    return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
     if(this.passwordChangedAt) {

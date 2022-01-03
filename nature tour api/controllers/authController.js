@@ -216,16 +216,27 @@ exports.resetPassword = catchAsync( async(req, res, next) => {
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
     // 1) Get user from collection
-    const user = await User.findById(req.user.id).select('+password');
-  
-    // 2) Check if POSTed current password is correct
-    if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
-      return next(new AppError('Your current password is wrong.', 401));
+
+    const { passwordCurrent, password, passwordConfirm} = req.body;
+
+    const user = await User.findById(req.user._id).select('+password');
+
+    console.log(user.name)
+
+    if (!user) {
+        return next(new AppError('User not found', 404))
     }
   
+    // 2) Check if POSTed current password is correct
+    if (!(await user.correctPassword(passwordCurrent, user.password))) {
+      return next(new AppError('Your current password is wrong.', 401));
+    };
+  
+
     // 3) If so, update password
-    user.password = req.body.password;
-    user.passwordConfirm = req.body.passwordConfirm;
+    user.password = password;
+    user.passwordConfirm = passwordConfirm;
+
     await user.save();
     // User.findByIdAndUpdate will NOT work as intended!
   
