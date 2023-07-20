@@ -38,7 +38,7 @@ pyasn1-modules==0.2.8
 pycodestyle==2.8.0
 pycparser==2.21
 PyDispatcher==2.0.5
-Pygments==2.10.0
+Pygments==2.15.0
 pylint==2.12.1
 pyOpenSSL==21.0.0
 queuelib==1.6.2
